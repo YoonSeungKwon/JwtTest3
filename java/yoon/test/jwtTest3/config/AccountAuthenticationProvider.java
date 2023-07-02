@@ -18,6 +18,7 @@ public class AccountAuthenticationProvider implements AuthenticationProvider {
     private final AccountDetailService accountDetailService;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
         String username = (String) authentication.getPrincipal();
         String password = (String) authentication.getCredentials();
 
