@@ -29,13 +29,9 @@ public class SecurityConfig {
 
         return http
                 .authorizeHttpRequests(auth ->{
+                    auth.requestMatchers("/auth").hasAnyRole("USER");
                     auth.anyRequest().permitAll();
                 })
-                .formLogin(formLogin ->formLogin
-                        .loginProcessingUrl("/account/login")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                )
                 .csrf(csrf->csrf.disable())
                 .httpBasic(Customizer.withDefaults())
                 .addFilterBefore(new JwtAuthenticationFIlter(jwtProvider), UsernamePasswordAuthenticationFilter.class)

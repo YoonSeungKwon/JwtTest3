@@ -17,7 +17,7 @@ import java.util.Date;
 public class JwtProvider {
 
     private final String SECRET_KEY = "asldmkwop912039cno4n293nxo23o";
-    private long exp = 60 * 60 * 1000;
+    private long exp = 60 * 60 * 1000l;
 
     private final AccountDetailService accountDetailService;
 
@@ -62,7 +62,10 @@ public class JwtProvider {
     }
 
     public String resolveToken(HttpServletRequest request){                 //get Token From Request
-        return request.getHeader("X-AUTH-TOKEN");
+        if(request.getHeader("authorization") != null ) {
+            return request.getHeader("authorization").substring(7);
+        }
+        return null;
     }
 
 }

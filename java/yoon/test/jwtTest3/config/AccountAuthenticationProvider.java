@@ -16,6 +16,7 @@ import yoon.test.jwtTest3.service.AccountDetailService;
 public class AccountAuthenticationProvider implements AuthenticationProvider {
 
     private final AccountDetailService accountDetailService;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
@@ -29,7 +30,7 @@ public class AccountAuthenticationProvider implements AuthenticationProvider {
         if(!passwordEncoder.matches(password,user.getPassword())){
             throw new UsernameNotFoundException("비밀번호가 일치하지 않습니다.");
         }
-        return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
     }
 
     @Override
